@@ -61,15 +61,15 @@
 			$group = new XMLElement('fieldset');
 			$group->setAttribute('class', 'settings');
 			$group->appendChild(new XMLElement('legend', 'Akismet Spam Filtering'));
-
+			
 			$label = Widget::Label('Wordpress API Key');
-			$label->appendChild(Widget::Input('settings[akismet][api-key]', General::Sanitize($this->getWordpressApiKey())));		
+			$label->appendChild(Widget::Input('settings[akismet][api-key]', General::Sanitize(Symphony::Configuration()->get('api-key', 'akismet'))));
 			$group->appendChild($label);
 			
 			$group->appendChild(new XMLElement('p', 'Get a Wordpress API key from the <a href="http://wordpress.com/api-keys/">Wordpress site</a>.', array('class' => 'help')));
 			
 			$context['wrapper']->appendChild($group);
-						
+			
 		}
 		
 		public function addFilterDocumentationToEvent($context){
@@ -121,10 +121,10 @@
 	            'comment_content' => implode($context['fields']),
 	            'permalink' => URL . $_REQUEST['page']
 	        );
-
+			
 			if(isset($mapping['url']) && strlen(trim($mapping['url'])) > 0) $comment['comment_author_url'] = $mapping['url'];
 
-	        $akismet = new akismet($this->getWordpressApiKey(), URL);
+	        $akismet = new akismet(Symphony::Configuration()->get('api-key', 'akismet'), URL);
 	        if(!$akismet->error) {
 	            $valid = !$akismet->is_spam($comment);
 	        }
@@ -134,24 +134,9 @@
 		}
 		
 		public function uninstall(){
-			
-			if(class_exists('ConfigurationAccessor'))
-				ConfigurationAccessor::remove('akismet');	
-			
-			else
-				$this->_Parent->Configuration->remove('akismet');	
-					
-			$this->_Parent->saveConfig();
-			
+			Symphony::Configuration()->remove('akismet');
+			Administration::instance()->saveConfig();
 			return true;
 		}
-
-		public function getWordpressApiKey(){
-			if(class_exists('ConfigurationAccessor'))
-				return ConfigurationAccessor::get('api-key', 'akismet');
-					
-			return $this->_Parent->Configuration->get('api-key', 'akismet');
-		}		
 		
 	}
-
