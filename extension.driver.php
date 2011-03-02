@@ -54,19 +54,19 @@
 		}
 		
 		public function addFilterToEventEditor($context){
-			$context['options'][] = array('akismet', @in_array('akismet', $context['selected']) ,'Akismet Spam Filtering');		
+			$context['options'][] = array('akismet', @in_array('akismet', $context['selected']), __('Akismet Spam Filtering'));
 		}
 		
 		public function appendPreferences($context){
 			$group = new XMLElement('fieldset');
 			$group->setAttribute('class', 'settings');
-			$group->appendChild(new XMLElement('legend', 'Akismet Spam Filtering'));
+			$group->appendChild(new XMLElement('legend', __('Akismet Spam Filtering')));
 			
-			$label = Widget::Label('Wordpress API Key');
+			$label = Widget::Label(__('Wordpress API Key'));
 			$label->appendChild(Widget::Input('settings[akismet][api-key]', General::Sanitize(Symphony::Configuration()->get('api-key', 'akismet'))));
 			$group->appendChild($label);
 			
-			$group->appendChild(new XMLElement('p', 'Get a Wordpress API key from the <a href="http://wordpress.com/api-keys/">Wordpress site</a>.', array('class' => 'help')));
+			$group->appendChild(new XMLElement('p', __('Get a Wordpress API key from the <a href="http://wordpress.com/api-keys/">Wordpress site</a>.'), array('class' => 'help')));
 			
 			$context['wrapper']->appendChild($group);
 			
@@ -103,7 +103,7 @@
 			$mapping = $_POST['akismet'];
 
 			if(!isset($mapping['author']) || !isset($mapping['email'])){
-				$context['messages'][] = array('akismet', false, 'Author and Email field mappings are required.');
+				$context['messages'][] = array('akismet', false, __('Author and Email field mappings are required.'));
 				return;
 			}			
 			
@@ -129,7 +129,7 @@
 	            $valid = !$akismet->is_spam($comment);
 	        }
 			
-			$context['messages'][] = array('akismet', $valid, (!$valid ? 'Data was identified as spam.' : NULL));
+			$context['messages'][] = array('akismet', $valid, (!$valid ? __('Data was identified as spam.') : NULL));
 			
 		}
 		
