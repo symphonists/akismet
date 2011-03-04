@@ -22,31 +22,26 @@
 							'delegate' => 'AppendEventFilter',
 							'callback' => 'addFilterToEventEditor'
 						),
-						
 						array(
 							'page' => '/blueprints/events/edit/',
 							'delegate' => 'AppendEventFilter',
 							'callback' => 'addFilterToEventEditor'
 						),
-						
 						array(
 							'page' => '/blueprints/events/new/',
 							'delegate' => 'AppendEventFilterDocumentation',
 							'callback' => 'addFilterDocumentationToEvent'
 						),
-											
 						array(
 							'page' => '/blueprints/events/edit/',
 							'delegate' => 'AppendEventFilterDocumentation',
 							'callback' => 'addFilterDocumentationToEvent'
 						),
-						
 						array(
 							'page' => '/system/preferences/',
 							'delegate' => 'AddCustomPreferenceFieldsets',
 							'callback' => 'appendPreferences'
 						),
-						
 						array(
 							'page' => '/frontend/',
 							'delegate' => 'EventPreSaveFilter',
