@@ -62,11 +62,11 @@
 			$group->setAttribute('class', 'settings');
 			$group->appendChild(new XMLElement('legend', __('Akismet Spam Filtering')));
 			
-			$label = Widget::Label(__('Wordpress API Key'));
+			$label = Widget::Label(__('Akismet API Key'));
 			$label->appendChild(Widget::Input('settings[akismet][api-key]', General::Sanitize(Symphony::Configuration()->get('api-key', 'akismet'))));
 			$group->appendChild($label);
 			
-			$group->appendChild(new XMLElement('p', __('Get a Wordpress API key from the <a href="http://wordpress.com/api-keys/">Wordpress site</a>.'), array('class' => 'help')));
+			$group->appendChild(new XMLElement('p', __('Get an Akistmet API key from the <a href="http://akismet.com/signup/">Akismet site</a>.'), array('class' => 'help')));
 			
 			$context['wrapper']->appendChild($group);
 			
