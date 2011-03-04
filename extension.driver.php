@@ -4,11 +4,10 @@
 
 		public function about(){
 			return array('name' => 'Akismet Spam Filtering',
-						 'version' => '1.3',
-						 'release-date' => '2009-02-08',
-						 'author' => array('name' => 'Alistair Kearney',
-										   'website' => 'http://www.pointybeard.com',
-										   'email' => 'alistair@pointybeard.com'),
+						 'version' => '1.4',
+						 'release-date' => '2011-03-04',
+						 'author' => array('name' => 'Symphony Community',
+										   'website' => 'https://github.com/symphonists'),
 						 'description' => 'Allows you to add a spam filter to your front end saving events.'
 				 		);
 		}
