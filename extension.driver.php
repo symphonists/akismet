@@ -3,13 +3,16 @@
 	Class extension_akismet extends Extension{
 
 		public function about(){
-			return array('name' => 'Akismet Spam Filtering',
-						 'version' => '1.4',
-						 'release-date' => '2011-03-04',
-						 'author' => array('name' => 'Symphony Community',
-										   'website' => 'https://github.com/symphonists'),
-						 'description' => 'Allows you to add a spam filter to your front end saving events.'
-				 		);
+			return array(
+					'name' => 'Akismet Spam Filtering',
+					'version' => '1.4',
+					'release-date' => '2011-03-04',
+					'author' => array(
+						'name' => 'Symphony Community',
+						'website' => 'https://github.com/symphonists'
+					),
+					'description' => 'Allows you to add a spam filter to your front end saving events.'
+				 );
 		}
 		
 		public function getSubscribedDelegates(){
