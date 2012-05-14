@@ -1,52 +1,39 @@
 <?php
 
 	Class extension_akismet extends Extension{
-
-		public function about(){
-			return array(
-					'name' => 'Akismet Spam Filtering',
-					'version' => '1.4',
-					'release-date' => '2011-03-04',
-					'author' => array(
-						'name' => 'Symphony Community',
-						'website' => 'https://github.com/symphonists'
-					),
-					'description' => 'Allows you to add a spam filter to your front end saving events.'
-				 );
-		}
 		
 		public function getSubscribedDelegates(){
 			return array(
-						array(
-							'page' => '/blueprints/events/new/',
-							'delegate' => 'AppendEventFilter',
-							'callback' => 'addFilterToEventEditor'
-						),
-						array(
-							'page' => '/blueprints/events/edit/',
-							'delegate' => 'AppendEventFilter',
-							'callback' => 'addFilterToEventEditor'
-						),
-						array(
-							'page' => '/blueprints/events/new/',
-							'delegate' => 'AppendEventFilterDocumentation',
-							'callback' => 'addFilterDocumentationToEvent'
-						),
-						array(
-							'page' => '/blueprints/events/edit/',
-							'delegate' => 'AppendEventFilterDocumentation',
-							'callback' => 'addFilterDocumentationToEvent'
-						),
-						array(
-							'page' => '/system/preferences/',
-							'delegate' => 'AddCustomPreferenceFieldsets',
-							'callback' => 'appendPreferences'
-						),
-						array(
-							'page' => '/frontend/',
-							'delegate' => 'EventPreSaveFilter',
-							'callback' => 'processEventData'
-						),						
+				array(
+					'page' => '/blueprints/events/new/',
+					'delegate' => 'AppendEventFilter',
+					'callback' => 'addFilterToEventEditor'
+				),
+				array(
+					'page' => '/blueprints/events/edit/',
+					'delegate' => 'AppendEventFilter',
+					'callback' => 'addFilterToEventEditor'
+				),
+				array(
+					'page' => '/blueprints/events/new/',
+					'delegate' => 'AppendEventFilterDocumentation',
+					'callback' => 'addFilterDocumentationToEvent'
+				),
+				array(
+					'page' => '/blueprints/events/edit/',
+					'delegate' => 'AppendEventFilterDocumentation',
+					'callback' => 'addFilterDocumentationToEvent'
+				),
+				array(
+					'page' => '/system/preferences/',
+					'delegate' => 'AddCustomPreferenceFieldsets',
+					'callback' => 'appendPreferences'
+				),
+				array(
+					'page' => '/frontend/',
+					'delegate' => 'EventPreSaveFilter',
+					'callback' => 'processEventData'
+				),
 			);
 		}
 		
@@ -74,7 +61,7 @@
 			
 			$context['documentation'][] = new XMLElement('h3', 'Akismet Spam Filtering');
 			
-			$context['documentation'][] = new XMLElement('p', 'Each entry will be passed to the <a href="http://akismet.com/">Akismet Spam filtering service</a> before saving. Should it be deemed as spam, Symphony will terminate execution of the Event, thus preventing the entry from being saved. You will receive notification in the Event XML. <strong>Note: Be sure to set your Akismet API key in the <a href="'.URL.'/symphony/system/preferences/">Symphony Preferences</a>.</strong>');
+			$context['documentation'][] = new XMLElement('p', 'Each entry will be passed to the <a href="http://akismet.com/">Akismet Spam filtering service</a> before saving. Should it be deemed as spam, Symphony will terminate execution of the Event, thus preventing the entry from being saved. You will receive notification in the Event XML. <strong>Note: Be sure to set your Akismet API key in the <a href="'.URL.'/symphony/system/preferences/">System Preferences</a>.</strong>');
 			
 			$context['documentation'][] = new XMLElement('p', 'The following is an example of the XML returned form this filter:');
 			$code = '<filter type="akismet" status="passed" />
@@ -132,7 +119,7 @@
 		
 		public function uninstall(){
 			Symphony::Configuration()->remove('akismet');
-			Administration::instance()->saveConfig();
+			Symphony::Configuration()->write();
 			return true;
 		}
 		
